@@ -18,3 +18,21 @@ function copyToClipboard(elementId) {
         alert('복사에 실패했습니다.');
     });
 }
+
+function openTab(evt, tabName) {
+    // Hide all tab contents
+    const tabContents = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+    }
+
+    // Remove active class from all buttons
+    const tabLinks = document.getElementsByClassName("tab-btn");
+    for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab and add active class to the button
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
