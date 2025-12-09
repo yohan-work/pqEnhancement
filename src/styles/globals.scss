@@ -1,0 +1,43 @@
+/* Global Variables & Reset */
+:root {
+    --primary-color: #3182F6;
+    --background-color: #F2F4F6;
+    --surface-color: #FFFFFF;
+    --text-primary: #191F28;
+    --text-secondary: #8B95A1;
+    --border-radius: 16px;
+    --spacing-base: 24px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Typography is handled by next/font in layout.tsx but we set defaults here */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
