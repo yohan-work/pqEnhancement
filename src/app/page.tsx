@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TabSystem from "@/components/TabSystem";
 import PromptCard from "@/components/PromptCard";
-import styles from "./page.module.scss";
+import styles from "@/styles/home.module.scss";
 import { roles } from "@/data/prompts";
 
 export default function Home() {
