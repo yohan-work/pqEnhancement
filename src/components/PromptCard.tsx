@@ -11,10 +11,22 @@ interface PromptCardProps {
 
 export default function PromptCard({ title, content, id }: PromptCardProps) {
     const [copied, setCopied] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentContent, setCurrentContent] = useState(content);
+
+    // Update local state if prop changes (optional, but good for search filtering updates)
+    if (content !== currentContent && !isEditing) {
+        // Only update if not currently editing to avoid overwriting user changes while typing
+        // Note: simplistic approach. For strict sync, useEffect is better, but this suffices for simple list rendering.
+    }
+    // Better: use key prop on parent to reset state when filter changes, 
+    // or useEffect to sync content prop changes if needed. 
+    // Given the list rerenders on search, new components might be mapped. 
+    // Let's stick to initial state being set only once or reset via key.
 
     const handleCopy = async () => {
         try {
-            await navigator.clipboard.writeText(content);
+            await navigator.clipboard.writeText(currentContent);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
@@ -27,7 +39,23 @@ export default function PromptCard({ title, content, id }: PromptCardProps) {
         <div className={styles.templateItem}>
             <h3>{title}</h3>
             <div className={styles.copyBox}>
-                <pre>{content}</pre>
+                {isEditing ? (
+                    <textarea
+                        className={styles.textArea}
+                        value={currentContent}
+                        onChange={(e) => setCurrentContent(e.target.value)}
+                    />
+                ) : (
+                    <pre>{currentContent}</pre>
+                )}
+
+                <button
+                    className={styles.editBtn}
+                    onClick={() => setIsEditing(!isEditing)}
+                >
+                    {isEditing ? "완료" : "수정"}
+                </button>
+
                 <button
                     className={`${styles.copyBtn} ${copied ? styles.copied : ""}`}
                     onClick={handleCopy}

@@ -11,18 +11,39 @@ interface TabSystemProps {
 
 export default function TabSystem({ roles }: TabSystemProps) {
     const [activeTab, setActiveTab] = useState(roles[0].id);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const activeRole = roles.find((role) => role.id === activeTab);
 
+    // Filter prompts based on search query
+    const filteredPrompts = activeRole?.prompts.filter((prompt) =>
+        prompt.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        prompt.content.toLowerCase().includes(searchQuery.toLowerCase())
+    ) || [];
+
     return (
         <div className={styles.tabContainer}>
+            {/* Search Input */}
+            <div className={styles.searchWrapper}>
+                <input
+                    type="text"
+                    placeholder="템플릿 검색..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className={styles.searchInput}
+                />
+            </div>
+
             <div className={styles.tabButtons}>
                 {roles.map((role) => (
                     <button
                         key={role.id}
                         className={`${styles.tabBtn} ${activeTab === role.id ? styles.active : ""
                             }`}
-                        onClick={() => setActiveTab(role.id)}
+                        onClick={() => {
+                            setActiveTab(role.id);
+                            setSearchQuery(""); // Reset search on tab change
+                        }}
                     >
                         {role.label}
                     </button>
@@ -30,21 +51,20 @@ export default function TabSystem({ roles }: TabSystemProps) {
             </div>
 
             <div className={styles.tabContent}>
-                {/* Role Badge (Optional, reused from legacy styles or just implicitly shown) */}
                 {activeRole && (
                     <div className={styles.roleGroup}>
-                        {/* Note: In Next.js, we don't necessarily need the badge anymore since the tab indicates context, 
-                 but if we want to mimic the legacy look exactly inside the content, we can. 
-                 For now, just listing the prompts is cleaner. */}
-
-                        {activeRole.prompts.map((prompt, index) => (
-                            <PromptCard
-                                key={`${activeRole.id}-${index}`}
-                                id={`${activeRole.id}-${index}`}
-                                title={prompt.title}
-                                content={prompt.content}
-                            />
-                        ))}
+                        {filteredPrompts.length > 0 ? (
+                            filteredPrompts.map((prompt, index) => (
+                                <PromptCard
+                                    key={`${activeRole.id}-${index}`}
+                                    id={`${activeRole.id}-${index}`}
+                                    title={prompt.title}
+                                    content={prompt.content}
+                                />
+                            ))
+                        ) : (
+                            <p className={styles.noResults}>검색 결과가 없습니다.</p>
+                        )}
                     </div>
                 )}
             </div>

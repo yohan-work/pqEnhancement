@@ -25,65 +25,67 @@ export default function Home() {
       <Header />
 
       <main>
-        {/* Section 1: AI Understanding */}
-        <section className={styles.card}>
-          <h2 className={styles.sectionTitle}>🤖 AI 이해하기</h2>
-          <p className={styles.description}>
-            AI는 마법 구슬이 아닙니다. <br />
-            <strong>"엄청 똑똑하지만 눈치 없는 신입 인턴"</strong>이라고
-            생각하세요.
-          </p>
-          <ul className={styles.tipList}>
-            <li>명확하게 지시하지 않으면 엉뚱한 답을 줍니다.</li>
-            <li>한 번에 모든 걸 시키기보다 단계별로 나누어 시키세요.</li>
-            <li>
-              틀린 정보를 말할 수 있으니(할루시네이션) 반드시 확인이 필요합니다.
-            </li>
-          </ul>
-        </section>
+        <div className={styles.gridContainer}>
+          {/* Section 1: AI Understanding */}
+          <section className={styles.card}>
+            <h2 className={styles.sectionTitle}>🤖 AI 이해하기</h2>
+            <p className={styles.description}>
+              AI는 마법 구슬이 아닙니다. <br />
+              <strong>"엄청 똑똑하지만 눈치 없는 신입 인턴"</strong>이라고
+              생각하세요.
+            </p>
+            <ul className={styles.tipList}>
+              <li>명확하게 지시하지 않으면 엉뚱한 답을 줍니다.</li>
+              <li>한 번에 모든 걸 시키기보다 단계별로 나누어 시키세요.</li>
+              <li>
+                틀린 정보를 말할 수 있으니(할루시네이션) 반드시 확인이 필요합니다.
+              </li>
+            </ul>
+          </section>
 
-        {/* Section 2: 3 Golden Rules */}
-        <section className={styles.card}>
-          <h2 className={styles.sectionTitle}>✨ 프롬프트 3원칙</h2>
-          <div className={styles.ruleBox}>
-            <h3>1. 페르소나 (Persona)</h3>
-            <p>AI에게 역할을 쥐어주세요. 전문가처럼 생각하고 답변합니다.</p>
-            <div className={styles.codeBlock}>
-              "너는 10년 차 전문 마케터야."<br />
-              "친절한 초등학교 선생님처럼 설명해줘."
+          {/* Section 2: 3 Golden Rules */}
+          <section className={styles.card}>
+            <h2 className={styles.sectionTitle}>✨ 프롬프트 3원칙</h2>
+            <div className={styles.ruleBox}>
+              <h3>1. 페르소나 (Persona)</h3>
+              <p>AI에게 역할을 쥐어주세요. 전문가처럼 생각하고 답변합니다.</p>
+              <div className={styles.codeBlock}>
+                "너는 10년 차 전문 마케터야."<br />
+                "친절한 초등학교 선생님처럼 설명해줘."
+              </div>
             </div>
-          </div>
-          <div className={styles.ruleBox}>
-            <h3>2. 맥락 (Context)</h3>
-            <p>배경 상황을 자세히 설명할수록 좋은 답이 나옵니다.</p>
-            <div className={styles.codeBlock}>
-              "나는 지금 다이어트 중이고, 탄수화물을 줄이려고 해." <br />
-              "우리 서비스는 20대 대학생이 주 타겟이야."
+            <div className={styles.ruleBox}>
+              <h3>2. 맥락 (Context)</h3>
+              <p>배경 상황을 자세히 설명할수록 좋은 답이 나옵니다.</p>
+              <div className={styles.codeBlock}>
+                "나는 지금 다이어트 중이고, 탄수화물을 줄이려고 해." <br />
+                "우리 서비스는 20대 대학생이 주 타겟이야."
+              </div>
             </div>
-          </div>
-          <div className={styles.ruleBox}>
-            <h3>3. 출력 형식 (Output Format)</h3>
-            <p>원하는 결과물의 형태를 지정하세요.</p>
-            <div className={styles.codeBlock}>
-              "표로 정리해줘." <br />
-              "블로그 포스팅 말투로 작성해줘." <br />
-              "3줄 요약해줘."
+            <div className={styles.ruleBox}>
+              <h3>3. 출력 형식 (Output Format)</h3>
+              <p>원하는 결과물의 형태를 지정하세요.</p>
+              <div className={styles.codeBlock}>
+                "표로 정리해줘." <br />
+                "블로그 포스팅 말투로 작성해줘." <br />
+                "3줄 요약해줘."
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Section 3: Basic Templates */}
-        <section className={styles.card}>
-          <h2 className={styles.sectionTitle}>📋 바로 쓰는 템플릿</h2>
-          {basicPrompts.map((prompt, idx) => (
-            <PromptCard
-              key={`basic-${idx}`}
-              id={`basic-${idx}`}
-              title={prompt.title}
-              content={prompt.content}
-            />
-          ))}
-        </section>
+          {/* Section 3: Basic Templates */}
+          <section className={styles.card}>
+            <h2 className={styles.sectionTitle}>📋 바로 쓰는 템플릿</h2>
+            {basicPrompts.map((prompt, idx) => (
+              <PromptCard
+                key={`basic-${idx}`}
+                id={`basic-${idx}`}
+                title={prompt.title}
+                content={prompt.content}
+              />
+            ))}
+          </section>
+        </div>
 
         {/* Section 4: Role-based Templates (Tab System) */}
         <section className={styles.card}>
