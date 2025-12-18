@@ -1,11 +1,26 @@
+"use client";
+
+import { useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TabSystem from "@/components/TabSystem";
 import PromptCard from "@/components/PromptCard";
 import styles from "@/styles/home.module.scss";
 import { roles } from "@/data/prompts";
+import usePromptStorage from "@/hooks/usePromptStorage";
 
 export default function Home() {
+  const { savedPrompts } = usePromptStorage();
+
+  const allRoles = useMemo(() => {
+    const libraryRole = {
+      id: "library",
+      label: "⭐ 내 보관함",
+      prompts: savedPrompts,
+    };
+    return [libraryRole, ...roles];
+  }, [savedPrompts]);
+
   const basicPrompts = [
     {
       title: "기획 아이디어 생성",
@@ -90,7 +105,7 @@ export default function Home() {
         {/* Section 4: Role-based Templates (Tab System) */}
         <section className={styles.card}>
           <h2 className={styles.sectionTitle}>💼 직군별 Advanced 템플릿</h2>
-          <TabSystem roles={roles} />
+          <TabSystem roles={allRoles} />
         </section>
 
         {/* Section 5: Credibility & Tips */}
