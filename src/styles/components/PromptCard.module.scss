@@ -1,10 +1,37 @@
-.templateItem {
-    margin-bottom: 24px;
+.headerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
 
     h3 {
         font-size: 16px;
         color: #333d4b;
-        margin-bottom: 8px;
+        margin: 0;
+    }
+}
+
+.saveBtn {
+    background: none;
+    border: 1px solid #e5e8eb;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #6b7684;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &:hover {
+        background-color: #f2f4f6;
+    }
+
+    &.saved {
+        color: #e91e63;
+        border-color: #ffd6e0;
+        background-color: #fff0f5;
     }
 }
 
@@ -15,20 +42,27 @@
     padding: 16px;
     position: relative;
 
+    /* Ensure action buttons don't overlap content on mobile/resize */
+    padding-bottom: 56px;
+
     pre {
         white-space: pre-wrap;
         font-family: "Noto Sans KR", sans-serif;
         color: #333d4b;
         font-size: 15px;
-        margin-bottom: 32px;
-        /* Space for button */
+        margin: 0;
     }
 }
 
-.copyBtn {
+.actionButtons {
     position: absolute;
     bottom: 12px;
     right: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.copyBtn {
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -53,9 +87,6 @@
 }
 
 .editBtn {
-    position: absolute;
-    bottom: 12px;
-    right: 80px; // Left of copy button
     background-color: transparent;
     color: var(--text-secondary);
     border: 1px solid #e5e8eb;
